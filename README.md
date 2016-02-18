@@ -1,3 +1,5 @@
+THIS IS NOT A FUNCTIONAL PROGRAM YET. DON'T EVEN TRY TO RUN IT.
+
 # URLDUMP
 
 This is a utility that will scan a directory full of .url (Windows) and .webloc (MacOS) shortcut files and produce a formatted listing. I have a folder full of these that I'd like to eventually scan for patterns in my interests.
