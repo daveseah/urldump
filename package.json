@@ -1,0 +1,14 @@
+{
+  "name": "urldump",
+  "version": "1.0.0",
+  "description": "Scan directory for .url and .webloc files, and output formatted listing",
+  "main": "urldump",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dave Seah",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
