@@ -2,11 +2,18 @@
   "name": "urldump",
   "version": "1.0.0",
   "description": "Scan directory for .url and .webloc files, and output formatted listing",
-  "main": "urldump",
+  "main": "urldump.js",
+  "bin": {
+    "urldump": "urldump.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dave Seah",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daveseah/urldump"
+  },
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0"
