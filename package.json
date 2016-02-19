@@ -2,9 +2,9 @@
   "name": "urldump",
   "version": "1.0.0",
   "description": "Scan directory for .url and .webloc files, and output formatted listing",
-  "main": "urldump.js",
+  "main": "main.js",
   "bin": {
-    "urldump": "urldump.js"
+    "urldump": "main.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
