@@ -40,9 +40,7 @@ fs.readdir( wd, function( err,files ) {
 	files.forEach(function(name){
 		var filePath = path.join(wd,name);
 		var stats = fs.statSync(filePath);
-		var out = '';
 		if (stats.isFile()) ProcessFile(filePath, stats);
-		console.log(out);
 	});
 	console.log('Found',num_webloc,'.webloc files and',num_url,'.url files');
 });
