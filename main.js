@@ -52,11 +52,17 @@ fs.readdir( wd, function( err,files ) {
 	XML types based on extension
 /*/	function ProcessFile ( filePath, stats ) {
 		switch (path.extname( filePath )) {
-			case '.webloc': 	ParseDotWebloc( filePath, stats );
-								break;
-			case '.url': 		ParseDotUrl( filePath, stats );
-								break;
-			default: 			return;
+			case '.webloc': 	
+				ParseDotWebloc( filePath, stats );
+				break;
+			case '.URL':
+			case '.url': 
+				ParseDotUrl( filePath, stats );
+				break;
+			default: 			
+				// console.log('***','unhandled extension',path.extname(filePath));
+				// console.log('   ', path.basename(filePath));
+				break;
 		}
 	}
 ///	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -64,6 +70,7 @@ fs.readdir( wd, function( err,files ) {
 /*/	function ParseDotWebloc ( filePath, stats ) {
 		var parser = new xml2js.Parser();
 		var data = fs.readFileSync(filePath,'utf8');
+		var extension = path.extname(filePath);
 		parser.parseString( data, function( err, result ) {
 			if (err) {
 				console.log(filePath,'error',err);
@@ -75,7 +82,8 @@ fs.readdir( wd, function( err,files ) {
 			var dd = ("0"+birth.getDate()).slice(-2);
 			var yyyy = birth.getFullYear();
 			var date = yyyy+'/'+mm+'/'+dd;
-			var out = '* '+date+' ['+path.basename(filePath,'.webloc')+']('+url+')';
+			var title = GetCleanFilename(filePath, extension);
+			var out = '* '+date+' ['+title+']('+url+')';
 			console.log(out);
 		});
 		num_webloc++;
@@ -83,6 +91,7 @@ fs.readdir( wd, function( err,files ) {
 ///	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /*/	Parse XML file in URL format
 /*/	function ParseDotUrl ( filePath, stats ) {
+		var extension = path.extname(filePath);
 		var result = ini.parse(fs.readFileSync(filePath,'utf-8'));
 		var url = result.InternetShortcut.URL;
 		var birth = stats.birthtime;
@@ -90,7 +99,15 @@ fs.readdir( wd, function( err,files ) {
 		var dd = ("0"+birth.getDate()).slice(-2);
 		var yyyy = birth.getFullYear();
 		var date = yyyy+'/'+mm+'/'+dd;
-		var out = '* '+date+' ['+path.basename(filePath,'.url')+']('+url+')';
+		var title = GetCleanFilename(filePath, extension);
+		var out = '* '+date+' ['+title+']('+url+')';
 		console.log(out);
 		num_url++;
+	}	
+///	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*/	Strip out characters and extra spaces
+/*/	function GetCleanFilename ( pathName, ext ) {
+		var clean = path.basename(pathName, ext).replace(/[^\w\s]/gi,'');
+			clean = clean.replace(/\s+/g,' ');
+		return clean;
 	}
