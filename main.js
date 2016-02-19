@@ -78,7 +78,7 @@ fs.readdir( wd, function( err,files ) {
 			var yyyy = birth.getFullYear();
 			var date = yyyy+'/'+mm+'/'+dd;
 			var out = '* '+date+' ['+path.basename(filePath,'.webloc')+']('+url+')';
-			console.log(SO,out);
+			console.log(out);
 		});
 		num_webloc++;
 	}
