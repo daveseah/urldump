@@ -53,13 +53,13 @@ fs.readdir( wd, function( err,files ) {
 /*/ given a valid filePath, determine if it's a file to parse of one of two
 	XML types based on extension
 /*/	function ProcessFile ( filePath, stats ) {
-			switch (path.extname( filePath )) {
-				case '.webloc': 	ParseDotWebloc( filePath, stats );
-									break;
-				case '.url': 		ParseDotUrl( filePath, stats );
-									break;
-				default: 			return;
-			}
+		switch (path.extname( filePath )) {
+			case '.webloc': 	ParseDotWebloc( filePath, stats );
+								break;
+			case '.url': 		ParseDotUrl( filePath, stats );
+								break;
+			default: 			return;
+		}
 	}
 ///	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /*/	Parse XML file in Webloc Format
@@ -78,7 +78,7 @@ fs.readdir( wd, function( err,files ) {
 			var yyyy = birth.getFullYear();
 			var date = yyyy+'/'+mm+'/'+dd;
 			var out = '* '+date+' ['+path.basename(filePath,'.webloc')+']('+url+')';
-			console.log(out);
+			console.log(SO,out);
 		});
 		num_webloc++;
 	}
