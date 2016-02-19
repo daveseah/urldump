@@ -1,18 +1,18 @@
 # URLDUMP
 
-This is a utility that will scan a directory full of .url (Windows) and .webloc (MacOS) shortcut files and produce a Markdown-formatted listing. I have a folder full of these that I'd like to scan and organize.
+This is a utility that scans a directory for .url (Windows) and .webloc (MacOS) shortcut files and produce a Markdown-formatted listing. I have a folder full of these that I'd like to scan and organize.
 
-The utility is written as a NodeJS program on OS X El Capitan. It may work on Windows systems with NodeJS installed.
+The utility is written as a NodeJS utility that installs to your command path via NPM.
 
 ## Installing
 
-If you don't have Node, install it. Then clone this repo.
+If you don't have Node, install it. Then clone this repo. Issue the following commands. 
 ```
 > cd urldump
 > npm install
 > npm link
 ```
-The last command will install urldump as a global command. If you need to delete it and `npm unlink` fails, go to `usr/local/bin/` and delete the `urldump@` symlink there.
+The `npm link` command installs urldump as a global command. (Mac) If you need to delete it and `npm unlink` fails, go to `usr/local/bin/` and delete the `urldump@` symlink there.
 
 ## Using
 
