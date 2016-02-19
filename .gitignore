@@ -28,6 +28,7 @@ what
 # Output folder
 /public
 # /dist
+/temp
 
 # Numerous always-ignore extensions
 *~
