@@ -28,6 +28,6 @@ Formatted text is output to the console, so to capture it to a file do something
 ```
 The formatting is as a bulleted list:
 
-* 2013/11/03 [Name of Shortcut File](http://url-to-destination)
+`* 2013/11/03 [Name of Shortcut File](http://url-to-destination)`
 
 That's all it does! It's pretty straightforward.
