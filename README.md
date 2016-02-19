@@ -1,17 +1,33 @@
-THIS IS NOT A FUNCTIONAL PROGRAM YET. DON'T EVEN TRY TO RUN IT.
-
 # URLDUMP
 
-This is a utility that will scan a directory full of .url (Windows) and .webloc (MacOS) shortcut files and produce a formatted listing. I have a folder full of these that I'd like to eventually scan for patterns in my interests.
+This is a utility that will scan a directory full of .url (Windows) and .webloc (MacOS) shortcut files and produce a Markdown-formatted listing. I have a folder full of these that I'd like to scan and organize.
 
-The utility is written as a NodeJS program. I followed a tutorial online to set it up. The steps are:
+The utility is written as a NodeJS program on OS X El Capitan. It may work on Windows systems with NodeJS installed.
 
-1. Create an empty repo on github and clone it to a development directory on your local dev machine.
-2. Decide what to call your command; this will determine how you enter in the information for the next step!
-3. Issue an `npm init` to create a `package.json` file with all the metadata. 
-4. Add a `bin` field to the `package.json` file as a key-value object of "command" keys to "javascript file". Like `"bin":{ "urldump":"urldump.js" }`
-5. Create the runfile associated with the entries in the `bin` key you just added. Add  `#!/usr/bin./env node` at the top and do normal NodeJS javascript
-6. Test it by executing `node urldump.js`
-7. Make it global by executing `npm link`
+## Installing
 
-Tada! That's where I am right now.
+If you don't have Node, install it. Then clone this repo.
+```
+> cd urldump
+> npm install
+> npm link
+```
+The last command will install urldump as a global command. If you need to delete it and `npm unlink` fails, go to `usr/local/bin/` and delete the `urldump@` symlink there.
+
+## Using
+
+This is a pretty basic command.
+```
+> urldump             # scans current directory for webloc and url
+> urldump <dir>       # scans for subpath in current directory
+> urldump /full/path  # scan the specified full path
+```
+Formatted text is output to the console, so to capture it to a file do something like this:
+```
+> urldump > index.md
+```
+The formatting is as a bulleted list:
+
+* 2013/11/03 [Name of Shortcut File](http://url-to-destination)
+
+That's all it does! It's pretty straightforward.
