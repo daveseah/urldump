@@ -1,18 +1,68 @@
 #!/usr/bin/env node
 
 var path = require('path');
+var fs = require('fs');
 var pkg = require(path.join(__dirname,'package.json'));
 var program = require ('commander');
 
+
+/// DECLARATIONS //////////////////////////////////////////////////////////////
+
+var wd 			= process.cwd();	// working directory default
+var SP 			= '   ';
+var num_webloc 	= 0;
+var num_url 	= 0;
+
+
+/// EXECUTION /////////////////////////////////////////////////////////////////
+
 program
 	.version(pkg.version)
-	.usage('usage');
+	.usage('[<dir>]')
+	.description('Scan the specified or current directory for .webloc and .url files, extract title and url, and emit a list.');
 
 program
 	.arguments('<dir>')
 	.action(function( dir ) {
-		console.log('directory',dir);
+		wd = path.resolve(dir);	// note resolve already checks for cwd
 	});
 
 // execute the parser
 program.parse(process.argv);
+
+// read files non-recursively from working directory wd
+fs.readdir( wd, function( err,files ) {
+	if (err) throw new Error(err);
+	console.log('Reading',files.length,'files...');
+	files.forEach(function(name){
+		var filePath = path.join(wd,name);
+		var stats = fs.statSync(filePath);
+		if (stats.isFile()) ProcessFile(filePath);
+	});
+	console.log('Found',num_webloc,'.webloc files and',num_url,'.url files');
+});
+
+
+/// SUPPORT FUNCTIONS /////////////////////////////////////////////////////////
+///	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*/ given a valid filePath, determine if it's a file to parse of one of two
+	XML types based on extension
+/*/	function ProcessFile ( filePath ) {
+		switch (path.extname( filePath )) {
+			case '.webloc': 	ParseDotWebloc( filePath );
+								break;
+			case '.url': 		ParseDotUrl( filePath );
+								break;
+			default: 			return;
+		}
+	}
+///	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*/	Parse XML file in Webloc Format
+/*/	function ParseDotWebloc ( filePath ) {
+		num_webloc++;
+	}
+///	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*/	Parse XML file in URL format
+/*/	function ParseDotUrl ( filePath ) {
+		num_url++;
+	}
